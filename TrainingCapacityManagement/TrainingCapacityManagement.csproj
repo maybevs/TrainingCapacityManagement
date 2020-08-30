@@ -5,14 +5,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200830154643_IdentityInitial.cs" />
+    <Compile Remove="Migrations\20200830154643_IdentityInitial.Designer.cs" />
+    <Compile Remove="Migrations\20200830162740_DefaultContextStart.cs" />
+    <Compile Remove="Migrations\20200830162740_DefaultContextStart.Designer.cs" />
+    <Compile Remove="Migrations\20200830162910_DefaultContextStart.cs" />
+    <Compile Remove="Migrations\20200830162910_DefaultContextStart.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using TrainingCapacityManagement.Data;
 using TrainingCapacityManagement.Models;
 
 namespace TrainingCapacityManagement.Controllers
@@ -13,13 +16,50 @@ namespace TrainingCapacityManagement.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly TrainingCapacityDefaultContext _context;
+
+        public HomeController(TrainingCapacityDefaultContext context,ILogger<HomeController> logger)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
+            try
+            {
+                var UserId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                ViewBag.User = UserId;
+                return RedirectToAction("Start");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.User = "No User found";
+            }
+            //var UserRole = HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+            //ViewBag.Role = UserRole;
+            return View();
+        }
+
+        public async Task<IActionResult> StartAsync()
+        {
+            var uId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var myTrainings = await _context.TrainingsRegistration.Where(tr => tr.UserId == uId).Include(tr => tr.Training).Include(tr => tr.Training.Sport).Include(tr => tr.Training.Gym).OrderBy(tr => tr.Training.StartTime).ToListAsync();
+            ViewBag.MyTrainings = myTrainings;
+
+
+            var trainings = _context.Training.Include(s => s.Sport).Include(s => s.Gym).OrderBy(s => s.StartTime);
+            ViewBag.Trainings = await trainings.ToListAsync();
+
+            try
+            {
+                var UserId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                ViewBag.User = UserId;
+            }
+            catch (Exception ex)
+            {
+                ViewBag.User = "No User found";
+            }
             return View();
         }
 

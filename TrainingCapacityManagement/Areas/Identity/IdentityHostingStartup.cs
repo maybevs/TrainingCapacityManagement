@@ -16,12 +16,12 @@ namespace TrainingCapacityManagement.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<TrainingCapacityManagementContext>(options =>
+                services.AddDbContext<TrainingCapacityDefaultContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("TrainingCapacityManagementContextConnection")));
+                        context.Configuration.GetConnectionString("TrainingCapacityDefaultContext")));
 
                 services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<TrainingCapacityManagementContext>();
+                    .AddEntityFrameworkStores<TrainingCapacityDefaultContext>();
             });
         }
     }

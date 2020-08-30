@@ -1,0 +1,41 @@
+﻿@model TrainingCapacityManagement.Models.GymSegment
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>Create</h1>
+
+<h4>GymSegment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Gym" class="control-label"></label>
+                @Html.DropDownListFor(m => m.GymSelection, new SelectList(ViewBag.Gyms, "Id", "Name"), new { @class = "form-control" })
+                <span asp-validation-for="Gym" class="text-danger"></span>
+                @*<select asp-for="Gym" class="form-control">
+                        @foreach (Gym g in ViewBag.Gyms)
+                        {
+                            <option value="" class="dropdown-item">@g.Name</option>
+                        }
+                    </select>*@
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

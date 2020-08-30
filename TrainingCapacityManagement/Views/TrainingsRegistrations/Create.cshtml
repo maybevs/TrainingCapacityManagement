@@ -1,0 +1,43 @@
+﻿@model TrainingCapacityManagement.Models.TrainingsRegistration
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Anmelden</h1>
+
+<h4>@ViewBag.Training.Sport.Name</h4>
+<hr />
+<div>
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Wichtig!</h4>
+        <p>@ViewBag.Training.SignupMessage</p>
+    </div>
+    <div class="alert alert-primary" role="alert">
+        <h4 class="alert-heading">Hygiene Konzept</h4>
+        <a href="@ViewBag.Training.SafetyConceptURL">@ViewBag.Training.SafetyConceptURL</a>
+    </div>
+    <p>Startzeit: @ViewBag.Training.StartTime</p>
+    <p>Ort: @ViewBag.Training.Gym.Name</p>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <input asp-for="tid" class="form-control" hidden>@ViewBag.Training.Id</input>
+                <span asp-validation-for="tid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

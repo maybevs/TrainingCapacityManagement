@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrainingCapacityManagement.Migrations
 {
-    public partial class IdentityInitial : Migration
+    public partial class DefaultContextStart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,34 @@ namespace TrainingCapacityManagement.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Gym",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    StreetAddress = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Gym", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sport",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sport", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,6 +182,82 @@ namespace TrainingCapacityManagement.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "GymSegment",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    GymId = table.Column<int>(nullable: true),
+                    GymSelection = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GymSegment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GymSegment_Gym_GymId",
+                        column: x => x.GymId,
+                        principalTable: "Gym",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Training",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SportId = table.Column<int>(nullable: true),
+                    StartTime = table.Column<DateTime>(nullable: false),
+                    EndTime = table.Column<DateTime>(nullable: false),
+                    GymId = table.Column<int>(nullable: true),
+                    Capacity = table.Column<int>(nullable: false),
+                    HouseholdsSharePlace = table.Column<bool>(nullable: false),
+                    SignupMessage = table.Column<string>(nullable: true),
+                    SafetyConceptURL = table.Column<string>(nullable: true),
+                    GymSelection = table.Column<int>(nullable: false),
+                    SportsSelection = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Training", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Training_Gym_GymId",
+                        column: x => x.GymId,
+                        principalTable: "Gym",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Training_Sport_SportId",
+                        column: x => x.SportId,
+                        principalTable: "Sport",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TrainingsRegistration",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TrainingId = table.Column<int>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    tid = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TrainingsRegistration", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TrainingsRegistration_Training_TrainingId",
+                        column: x => x.TrainingId,
+                        principalTable: "Training",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -192,6 +296,26 @@ namespace TrainingCapacityManagement.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GymSegment_GymId",
+                table: "GymSegment",
+                column: "GymId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Training_GymId",
+                table: "Training",
+                column: "GymId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Training_SportId",
+                table: "Training",
+                column: "SportId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TrainingsRegistration_TrainingId",
+                table: "TrainingsRegistration",
+                column: "TrainingId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -212,10 +336,25 @@ namespace TrainingCapacityManagement.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "GymSegment");
+
+            migrationBuilder.DropTable(
+                name: "TrainingsRegistration");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Training");
+
+            migrationBuilder.DropTable(
+                name: "Gym");
+
+            migrationBuilder.DropTable(
+                name: "Sport");
         }
     }
 }

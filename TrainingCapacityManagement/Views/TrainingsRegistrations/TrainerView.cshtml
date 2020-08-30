@@ -1,0 +1,36 @@
+﻿@model IEnumerable<TrainingCapacityManagement.Models.TrainingsRegistration>
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Anmeldungen</h1>
+<p>Ort: @Model.FirstOrDefault().Training.Gym.Name</p>
+<p>Startzeit: @Model.FirstOrDefault().Training.StartTime</p>
+
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Teilnehmer
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(((List<IdentityUser>)ViewBag.Users).Where(u => u.Id == item.UserId).FirstOrDefault())
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Löschen</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
