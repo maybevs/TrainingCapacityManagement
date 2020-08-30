@@ -74,11 +74,19 @@ namespace TrainingCapacityManagement.Controllers
         // GET: TrainingsRegistrations/Create
         public async Task<IActionResult> CreateAsync(int? tid)
         {
+            var reservations = await _context.TrainingsRegistration.Include(t => t.Training).Where(t => t.Training.Id == tid).CountAsync();
+            var training = await _context.Training.Where(t => t.Id == tid).Include(t => t.Sport).Include(t => t.Gym).FirstOrDefaultAsync();
+            if (training.Capacity - reservations < 1)
+            {
+                return RedirectToAction("Start", "Home");
+            }
+
+
             if (tid != null)
             {
                 ViewBag.Id = tid;
 
-                var training = await _context.Training.Where(t => t.Id == tid).Include(t => t.Sport).Include(t => t.Gym).FirstOrDefaultAsync();
+                
                 ViewBag.Training = training;
                 return View();
             }
@@ -99,6 +107,14 @@ namespace TrainingCapacityManagement.Controllers
             if (ModelState.IsValid)
             {
                 trainingsRegistration.Training = await _context.Training.Where(t => t.Id == trainingsRegistration.tid).FirstOrDefaultAsync();
+                var reservations = await _context.TrainingsRegistration.Include(t => t.Training).Where(t => t.Training == trainingsRegistration.Training).CountAsync();
+                if (reservations == 0)
+                {
+                    return View(trainingsRegistration);
+                }
+
+
+
                 trainingsRegistration.UserId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 _context.Add(trainingsRegistration);
                 await _context.SaveChangesAsync();
