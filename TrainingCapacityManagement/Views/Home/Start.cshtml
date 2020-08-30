@@ -2,9 +2,9 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+@*<div class="text-center">
     <h1 class="display-4">Zeit für Sport</h1>
-</div>
+</div>*@
 <div>
     <h3>Deine Trainings</h3>
     <div class="container">
@@ -26,8 +26,8 @@
 
                             <a href="/TrainingsRegistrations/Delete/@t.Id" class="btn btn-danger">Abmelden</a>
                         </div>
-                        <div class="card-footer text-muted alert-success text-center">
-                            <p>Noch x Plätze frei.</p>
+                        <div class="card-footer text-muted text-center">
+                            <p>Reserviert</p>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
             @{
                 int ii = 1;
             }
-            @foreach (Training t in ViewBag.Trainings)
+            @foreach (var t in ViewBag.Trainings)
             {
             <div class="col-sm-4">
                 <div class="card">
@@ -57,13 +57,13 @@
                         Training
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">@t.Sport.Name</h5>
-                        <p class="card-text">@t.StartTime</p>
+                        <h5 class="card-title">@t.Key.Sport.Name</h5>
+                        <p class="card-text">@t.Key.StartTime</p>
                         
-                        <a href="/TrainingsRegistrations/Create/?tid=@t.Id" class="btn btn-primary">Anmelden</a>
+                        <a href="/TrainingsRegistrations/Create/?tid=@t.Key.Id" class="btn @(t.Value>=1?"btn-primary":"btn-secondary disabled")" @(t.Value < 1 ? "aria-disabled=true":"") >Anmelden</a>
                     </div>
-                    <div class="card-footer text-muted alert-success text-center">
-                        <p>Noch x Plätze frei.</p>
+                    <div class="card-footer text-muted text-center @(t.Value<=5?"alert-danger":"alert-success")">
+                        <p>Noch @t.Value Plätze frei.</p>
                     </div>
                 </div>
             </div>

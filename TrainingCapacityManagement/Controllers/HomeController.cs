@@ -44,12 +44,35 @@ namespace TrainingCapacityManagement.Controllers
         public async Task<IActionResult> StartAsync()
         {
             var uId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var myTrainings = await _context.TrainingsRegistration.Where(tr => tr.UserId == uId).Include(tr => tr.Training).Include(tr => tr.Training.Sport).Include(tr => tr.Training.Gym).OrderBy(tr => tr.Training.StartTime).ToListAsync();
+            var allRegs = await _context.TrainingsRegistration.Include(tr => tr.Training).Include(tr => tr.Training.Sport).Include(tr => tr.Training.Gym).OrderBy(tr => tr.Training.StartTime).ToListAsync();
+            var myTrainings = allRegs.Where(tr => tr.UserId == uId);
             ViewBag.MyTrainings = myTrainings;
 
 
-            var trainings = _context.Training.Include(s => s.Sport).Include(s => s.Gym).OrderBy(s => s.StartTime);
-            ViewBag.Trainings = await trainings.ToListAsync();
+            var trainings = await _context.Training.Include(s => s.Sport).Include(s => s.Gym).OrderBy(s => s.StartTime).ToListAsync();
+
+            foreach (var mytraining in myTrainings)
+            {
+                trainings.Remove(mytraining.Training);
+            }
+
+            Dictionary<Training, int> trainingsWithRemainingCapa = new Dictionary<Training, int>();
+
+            foreach (var training in trainings)
+            {
+                var regs = allRegs.Where(reg => reg.Training == training).ToList();
+                if(regs.Count >= training.Capacity)
+                {
+                    trainingsWithRemainingCapa.Add(training, 0);
+                }
+                else
+                {
+                    trainingsWithRemainingCapa.Add(training, training.Capacity - regs.Count);
+                }
+            }
+
+            ViewBag.Trainings = trainingsWithRemainingCapa;
+            
 
             try
             {
