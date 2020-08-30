@@ -21,14 +21,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var user in ViewBag.Users)
         {
             <tr>
                 <td>
-                    @(((List<IdentityUser>)ViewBag.Users).Where(u => u.Id == item.UserId).FirstOrDefault())
+                    @user.FirstName @user.LastName
                 </td>
                 <td>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Löschen</a>
+                    @*<a asp-action="Delete" asp-route-id="@item.Id">Löschen</a>*@
                 </td>
             </tr>
         }

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using TrainingCapacityManagement.Data;
 using TrainingCapacityManagement.Models;
 using System.Security.Claims;
+using TrainingCapacityManagement.Areas.Identity.Data;
 
 namespace TrainingCapacityManagement.Controllers
 {
@@ -31,7 +32,18 @@ namespace TrainingCapacityManagement.Controllers
         {
             var registrations = await _context.TrainingsRegistration.Include(tr => tr.Training).Include(tr => tr.Training.Sport).Include(tr => tr.Training.Gym).Where(tr => tr.Training.Id == tid).ToListAsync();
             var users = await _context.Users.ToListAsync();
-            ViewBag.Users = users;
+            List<ApplicationUser> registeredUsers = new List<ApplicationUser>();
+
+            foreach (var reg in registrations)
+            {
+                var u = users.Find(u => u.Id == reg.UserId);
+                if (u != null)
+                {
+                    registeredUsers.Add(u);
+                }
+            }
+
+            ViewBag.Users = registeredUsers;
             return View(registrations);
         }
 
