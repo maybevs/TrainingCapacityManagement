@@ -6,11 +6,11 @@ With COVID19 training in Gyms isn't as easy as before. Ever before it was just a
 This is a little tool I wrote for my Archery-Club which provides an easy way of online signups.
 
 ## Features
-Create trainings,
-Register for trainings,
-Have a list for trainers to cross check names.
+* Create trainings,
+* Register for trainings,
+* Have a list for trainers to cross check names.
 
 ## Currently missing
-Roles for Admins/Trainers are not yet implemented.
-Design is horrible.
-SendGrid implementation for automatic EMails.
+* Roles for Admins/Trainers are not yet implemented.
+* Design is horrible.
+* SendGrid implementation for automatic EMails.
