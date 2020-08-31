@@ -52,9 +52,7 @@ namespace TrainingCapacityManagement.Controllers
 
             var trainings = await _context.Training.Include(s => s.Sport).Include(s => s.Gym).OrderBy(s => s.StartTime).ToListAsync();
             var pubDate = trainings.First().PublishingDate;
-            var test = DateTime.Compare(pubDate, DateTime.Now.AddDays(-1));
-            var test2 = DateTime.Compare(pubDate, DateTime.Now);
-            trainings = trainings.Where(s => DateTime.Compare(s.PublishingDate,DateTime.Now) == -1).ToList();
+            trainings = trainings.Where(s => DateTime.Compare(s.PublishingDate,DateTime.Now.AddHours(2)) == -1).ToList();
             foreach (var mytraining in myTrainings)
             {
                 trainings.Remove(mytraining.Training);
