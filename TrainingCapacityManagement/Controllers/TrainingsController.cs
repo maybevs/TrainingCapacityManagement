@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using TrainingCapacityManagement.Models;
 
 namespace TrainingCapacityManagement.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Trainer")]
     public class TrainingsController : Controller
     {
         private readonly TrainingCapacityDefaultContext _context;
@@ -20,6 +23,7 @@ namespace TrainingCapacityManagement.Controllers
         }
 
         // GET: Trainings
+        
         public async Task<IActionResult> Index()
         {
             var trainings = _context.Training.Include(t => t.Sport).Include(t => t.Gym);

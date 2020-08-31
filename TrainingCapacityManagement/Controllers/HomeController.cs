@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -40,7 +41,7 @@ namespace TrainingCapacityManagement.Controllers
             //ViewBag.Role = UserRole;
             return View();
         }
-
+        [Authorize]
         public async Task<IActionResult> StartAsync()
         {
             var uId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;

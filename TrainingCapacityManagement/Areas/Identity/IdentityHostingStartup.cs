@@ -21,6 +21,7 @@ namespace TrainingCapacityManagement.Areas.Identity
                         context.Configuration.GetConnectionString("TrainingCapacityDefaultContext")));
 
                 services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<TrainingCapacityDefaultContext>();
             });
         }
