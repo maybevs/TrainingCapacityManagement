@@ -112,7 +112,7 @@ namespace TrainingCapacityManagement.Controllers
             {
                 trainingsRegistration.Training = await _context.Training.Where(t => t.Id == trainingsRegistration.tid).FirstOrDefaultAsync();
                 var reservations = await _context.TrainingsRegistration.Include(t => t.Training).Where(t => t.Training == trainingsRegistration.Training).CountAsync();
-                if (reservations == 0)
+                if (trainingsRegistration.Training.Capacity - reservations < 1 )
                 {
                     return View(trainingsRegistration);
                 }
