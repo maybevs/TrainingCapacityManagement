@@ -51,6 +51,11 @@
                 <span asp-validation-for="SafetyConceptURL" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="PublishingDate" class="control-label"></label>
+                <input asp-for="PublishingDate" class="form-control" value="@DateTime.Now"/>
+                <span asp-validation-for="PublishingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Speichern" class="btn btn-primary" />
             </div>
         </form>

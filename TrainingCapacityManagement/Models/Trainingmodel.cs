@@ -12,6 +12,7 @@ namespace TrainingCapacityManagement.Models
         public int Id { get; set; }
         [Display(Name = "Sportart")]
         public Sport Sport { get; set; }
+        [Required]
         [Display(Name = "Trainingsbeginn")]
         public DateTime StartTime { get; set; }
         [Display(Name = "Trainingsende")]
@@ -26,6 +27,8 @@ namespace TrainingCapacityManagement.Models
         public string SignupMessage { get; set; }
         [Display(Name = "Hygienekonzept", Description = "Link zum Hygienekonzept")]
         public string SafetyConceptURL { get; set; }
+        [Display(Name ="Veröffentlichungsdatum")]
+        public DateTime PublishingDate { get; set; }
 
         public int GymSelection { get; set; }
         public int SportsSelection { get; set; }

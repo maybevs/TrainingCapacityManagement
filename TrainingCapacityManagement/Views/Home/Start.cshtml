@@ -58,9 +58,10 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">@t.Key.Sport.Name</h5>
+                        <p class="card-text">@t.Key.Gym.Name</p>
                         <p class="card-text">@t.Key.StartTime</p>
-                        
-                        <a href="/TrainingsRegistrations/Create/?tid=@t.Key.Id" class="btn @(t.Value>=1?"btn-primary":"btn-secondary disabled")" @(t.Value < 1 ? "aria-disabled=true":"") >Anmelden</a>
+
+                        <a href="/TrainingsRegistrations/Create/?tid=@t.Key.Id" class="btn @(t.Value>=1?"btn-primary":"btn-secondary disabled")" @(t.Value < 1 ? "aria-disabled=true" : "")>Anmelden</a>
                     </div>
                     <div class="card-footer text-muted text-center @(t.Value<=5?"alert-danger":"alert-success")">
                         <p>Noch @t.Value Plätze frei.</p>

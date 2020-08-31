@@ -63,7 +63,7 @@ namespace TrainingCapacityManagement.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StartTime,EndTime,Capacity,HouseholdsSharePlace,SignupMessage,SafetyConceptURL,SportsSelection,GymSelection")] Training training)
+        public async Task<IActionResult> Create([Bind("Id,StartTime,EndTime,Capacity,HouseholdsSharePlace,SignupMessage,SafetyConceptURL,SportsSelection,GymSelection,PublishingDate")] Training training)
         {
             if (ModelState.IsValid)
             {

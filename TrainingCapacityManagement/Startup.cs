@@ -26,9 +26,11 @@ namespace TrainingCapacityManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            var connectionString = Configuration["ConnectionStrings:TrainingCapacityDefaultContext"];
+            //var connectionString = Configuration["ConnectionStrings:TrainingCapacityDefaultContext"];
+            //services.AddDbContext<TrainingCapacityDefaultContext>(options =>
+            //        options.UseSqlServer(connectionString));
             services.AddDbContext<TrainingCapacityDefaultContext>(options =>
-                    options.UseSqlServer(connectionString));
+                    options.UseSqlServer(Configuration.GetConnectionString("TrainingCapacityDefaultContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

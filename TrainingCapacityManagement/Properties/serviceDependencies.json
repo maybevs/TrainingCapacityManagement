@@ -4,12 +4,12 @@
       "type": "mssql",
       "connectionId": "TrainingCapacityManagementContextConnection"
     },
+    "secrets1": {
+      "type": "secrets"
+    },
     "mssql2": {
       "type": "mssql",
       "connectionId": "TrainingCapacityDefaultContext"
-    },
-    "secrets1": {
-      "type": "secrets"
     },
     "mssql3": {
       "type": "mssql",

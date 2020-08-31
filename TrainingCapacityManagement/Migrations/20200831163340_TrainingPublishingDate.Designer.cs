@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrainingCapacityManagement.Data;
 
 namespace TrainingCapacityManagement.Migrations
 {
     [DbContext(typeof(TrainingCapacityDefaultContext))]
-    partial class TrainingCapacityDefaultContextModelSnapshot : ModelSnapshot
+    [Migration("20200831163340_TrainingPublishingDate")]
+    partial class TrainingPublishingDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -315,7 +317,7 @@ namespace TrainingCapacityManagement.Migrations
                     b.Property<string>("SignupMessage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SportId")
+                    b.Property<int>("SportId")
                         .HasColumnType("int");
 
                     b.Property<int>("SportsSelection")
@@ -422,7 +424,9 @@ namespace TrainingCapacityManagement.Migrations
 
                     b.HasOne("TrainingCapacityManagement.Models.Sport", "Sport")
                         .WithMany()
-                        .HasForeignKey("SportId");
+                        .HasForeignKey("SportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TrainingCapacityManagement.Models.TrainingsRegistration", b =>
