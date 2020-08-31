@@ -11,6 +11,5 @@ This is a little tool I wrote for my Archery-Club which provides an easy way of 
 * Have a list for trainers to cross check names.
 
 ## Currently missing
-* Roles for Admins/Trainers are not yet implemented.
 * Design is horrible.
 * SendGrid implementation for automatic EMails.
