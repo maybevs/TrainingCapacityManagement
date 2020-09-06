@@ -15,7 +15,8 @@ namespace TrainingCapacityManagement.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+            builder.ConfigureServices((context, services) =>
+            {
                 services.AddDbContext<TrainingCapacityDefaultContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("TrainingCapacityDefaultContext")));

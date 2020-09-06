@@ -34,6 +34,8 @@ namespace TrainingCapacityManagement.Models
 
         public int GymSelection { get; set; }
         public int SportsSelection { get; set; }
+
+        public DateTime DateSelection { get; set; }
     }
 
     public class Sport
