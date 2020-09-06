@@ -185,7 +185,7 @@ namespace TrainingCapacityManagement.Controllers
                 return NotFound();
             }
 
-            var trainingsRegistration = await _context.TrainingsRegistration
+            var trainingsRegistration = await _context.TrainingsRegistration.Include(s => s.Training).Include(s => s.Training.Sport)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (trainingsRegistration == null)
             {

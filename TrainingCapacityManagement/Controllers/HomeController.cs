@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -23,6 +24,7 @@ namespace TrainingCapacityManagement.Controllers
         {
             _logger = logger;
             _context = context;
+            
         }
 
         public IActionResult Index()
@@ -46,17 +48,17 @@ namespace TrainingCapacityManagement.Controllers
         {
             var uId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var allRegs = await _context.TrainingsRegistration.Include(tr => tr.Training).Include(tr => tr.Training.Sport).Include(tr => tr.Training.Gym).OrderBy(tr => tr.Training.StartTime).ToListAsync();
-            var myTrainings = allRegs.Where(tr => tr.UserId == uId);
+            var myTrainings = allRegs.Where(tr => tr.UserId == uId).ToList();
             ViewBag.MyTrainings = myTrainings;
 
 
             var trainings = await _context.Training.Include(s => s.Sport).Include(s => s.Gym).OrderBy(s => s.StartTime).ToListAsync();
-            var pubDate = trainings.First().PublishingDate;
-            trainings = trainings.Where(s => DateTime.Compare(s.PublishingDate,DateTime.Now.AddHours(2)) == -1).ToList();
-            foreach (var mytraining in myTrainings)
-            {
-                trainings.Remove(mytraining.Training);
-            }
+            
+            trainings = trainings.Where(s => DateTime.Compare(s.PublishingDate,DateTime.Now.AddHours(2)) == -1).Where(s => DateTime.Compare(s.StartTime,DateTime.Now.AddDays(1)) == 1).ToList();
+            //foreach (var mytraining in myTrainings)
+            //{
+            //    trainings.Remove(mytraining.Training);
+            //}
 
             Dictionary<Training, int> trainingsWithRemainingCapa = new Dictionary<Training, int>();
 

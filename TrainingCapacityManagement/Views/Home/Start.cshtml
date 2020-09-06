@@ -6,9 +6,9 @@
     <h1 class="display-4">Zeit für Sport</h1>
 </div>*@
 <div>
-    <h3>Deine Trainings</h3>
-    <div class="container">
-        <div class="row">
+    <h4>Deine Trainings</h4>
+    <div class="container-lg">
+        @*<div class="row">
             @{
                 int i = 1;
             }
@@ -39,11 +39,100 @@
                 i++;
 
             }
-        </div>
+        </div>*@
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Sportart
+                    </th>
+                    <th>
+                        Event
+                    </th>
+                    <th>
+                        Datum
+                    </th>
+                    <th>
+                        Zeit
+                    </th>
+                    <th>
+                        Anmeldestatus
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @*@foreach (TrainingsRegistration t in ViewBag.MyTrainings)*@
+                @{List<TrainingsRegistration> myTrainings = (List<TrainingsRegistration>)ViewBag.MyTrainings;}
+                            @foreach (var t in ViewBag.Trainings)
+                            {
+                                bool isRegistered = myTrainings.Where(m => m.Training == (Training)t.Key).Count() != 0;
+                                bool isFull = t.Value == 0;
+                                string myClass = "";
+                                if(isRegistered)
+                                {
+                                    myClass = "table-success";
+                                }
+                                else
+                                {
+                                    if(isFull)
+                                    {
+                                        myClass = "table-secondary";
+                                    }
+                                }
+
+                <tr class="@myClass">
+                    <td>
+                        @t.Key.Sport.Name
+                    </td>
+                    <td>
+                        @t.Key.Gym.Name
+                    </td>
+                    <td>
+                        @t.Key.StartTime.ToShortDateString()
+                    </td>
+                    <td>
+                        @t.Key.StartTime.ToShortTimeString() - @t.Key.EndTime.ToShortTimeString()
+                    </td>
+                    <td>
+                        @((int)t.Key.Capacity-t.Value) / @t.Key.Capacity
+                    </td>
+
+                    @if (!isRegistered)
+                    {
+                        <td>
+                            <a href="/TrainingsRegistrations/Create/?tid=@t.Key.Id" class="btn btn-sm @(t.Value>=1?"btn-primary":"btn-secondary disabled")" @(t.Value < 1 ? "aria-disabled=true" : "")>Anmelden</a>
+                        </td>
+                    }
+                    else
+                    {
+                        var tReg = myTrainings.Where(m => m.Training == (Training)t.Key).FirstOrDefault();
+                        <td>
+                            <a href="/TrainingsRegistrations/Delete/@tReg.Id" class="btn btn-sm btn-danger">Abmelden</a>
+                        </td>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Admin") || User.IsInRole("Trainer"))
+
+                        {
+                <td>
+                    <a href="/TrainingsRegistrations/TrainerView/?tid=@t.Key.Id">Anmeldungen anzeigen</a> |
+                    <a href="/Trainings/Delete/@t.Key.Id">Training Absagen</a>
+                </td>
+                        }
+                    }
+                        </tr>
+                             }
+            </tbody>
+        </table>
+
     </div>
+    @*<hr class="border-primary"/>*@
 
 
-    <h3>Offene Trainings</h3>
+    @*<h4>Offene Trainings</h4>
     <div class="container">
         <div class="row">
             @{
@@ -51,23 +140,23 @@
             }
             @foreach (var t in ViewBag.Trainings)
             {
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-header text-center">
-                        Training
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">@t.Key.Sport.Name</h5>
-                        <p class="card-text">@t.Key.Gym.Name</p>
-                        <p class="card-text">@t.Key.StartTime</p>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            Training
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@t.Key.Sport.Name</h5>
+                            <p class="card-text">@t.Key.Gym.Name</p>
+                            <p class="card-text">@t.Key.StartTime</p>
 
-                        <a href="/TrainingsRegistrations/Create/?tid=@t.Key.Id" class="btn @(t.Value>=1?"btn-primary":"btn-secondary disabled")" @(t.Value < 1 ? "aria-disabled=true" : "")>Anmelden</a>
-                    </div>
-                    <div class="card-footer text-muted text-center @(t.Value<=5?"alert-danger":"alert-success")">
-                        <p>Noch @t.Value Plätze frei.</p>
+                            <a href="/TrainingsRegistrations/Create/?tid=@t.Key.Id" class="btn @(t.Value>=1?"btn-primary":"btn-secondary disabled")" @(t.Value < 1 ? "aria-disabled=true" : "")>Anmelden</a>
+                        </div>
+                        <div class="card-footer text-muted text-center @(t.Value<=5?"alert-danger":"alert-success")">
+                            <p>Noch @t.Value Plätze frei.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
                 @if (ii % 3 == 0)
                 {
                     <div class="w-100"></div>
@@ -77,7 +166,9 @@
 
             }
         </div>
-    </div>
+
+        
+    </div>*@
 
 
     @*<p>@ViewBag.User</p>*@
