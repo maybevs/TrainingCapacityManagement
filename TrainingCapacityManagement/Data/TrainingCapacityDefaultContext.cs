@@ -26,6 +26,8 @@ namespace TrainingCapacityManagement.Data
 
         public DbSet<TrainingCapacityManagement.Models.TrainingsRegistration> TrainingsRegistration { get; set; }
 
+        public DbSet<TrainingCapacityManagement.Models.Message> Message { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

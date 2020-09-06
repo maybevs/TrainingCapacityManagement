@@ -17,9 +17,9 @@ namespace TrainingCapacityManagement.Areas.Identity
         {
             builder.ConfigureServices((context, services) =>
             {
-                services.AddDbContext<TrainingCapacityDefaultContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("TrainingCapacityDefaultContext")));
+                //services.AddDbContext<TrainingCapacityDefaultContext>(options =>
+                //    options.UseSqlServer(
+                //        context.Configuration.GetConnectionString("TrainingCapacityDefaultContext")));
 
                 services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()

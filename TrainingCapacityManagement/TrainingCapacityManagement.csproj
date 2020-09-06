@@ -12,6 +12,8 @@
     <Compile Remove="Migrations\20200830162740_DefaultContextStart.Designer.cs" />
     <Compile Remove="Migrations\20200830162910_DefaultContextStart.cs" />
     <Compile Remove="Migrations\20200830162910_DefaultContextStart.Designer.cs" />
+    <Compile Remove="Migrations\20200906165552_MessageAdded2.cs" />
+    <Compile Remove="Migrations\20200906165552_MessageAdded2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

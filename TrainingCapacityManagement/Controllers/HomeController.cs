@@ -87,6 +87,12 @@ namespace TrainingCapacityManagement.Controllers
             {
                 ViewBag.User = "No User found";
             }
+
+            var msgs = await _context.Message.ToListAsync();
+
+            ViewBag.Messages = msgs;
+
+
             return View();
         }
 

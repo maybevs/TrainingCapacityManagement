@@ -6,6 +6,17 @@
     <h1 class="display-4">Zeit für Sport</h1>
 </div>*@
 <div>
+    @if(ViewBag.Messages != null)
+    {
+        foreach(Message message in ViewBag.Messages)
+        {
+            <div class="jumbotron">
+                <h4>@message.Title</h4>
+                <p class="lead">@message.Body</p>
+            </div>
+        }
+    }
+
     <h4>Deine Trainings</h4>
     <div class="container-lg">
         @*<div class="row">
