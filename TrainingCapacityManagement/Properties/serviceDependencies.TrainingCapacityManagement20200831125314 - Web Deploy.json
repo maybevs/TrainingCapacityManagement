@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "mssql2": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/artemistraining/databases/trainingcapacity",
-      "type": "mssql.azure",
-      "connectionId": "TrainingCapacityDefaultContext",
-      "secretStore": "AzureAppSettings"
-    },
     "mssql3": {
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/artemistraining/databases/trainingcapacity",
       "type": "mssql.azure",

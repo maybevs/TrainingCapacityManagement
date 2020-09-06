@@ -1,13 +1,5 @@
 {
   "dependencies": {
-    "mssql1": {
-      "type": "mssql.local",
-      "connectionId": "TrainingCapacityManagementContextConnection"
-    },
-    "mssql2": {
-      "type": "mssql.local",
-      "connectionId": "TrainingCapacityDefaultContext"
-    },
     "secrets1": {
       "type": "secrets.user"
     },
