@@ -12,6 +12,8 @@ namespace TrainingCapacityManagement.Models
         public int Id { get; set; }
         [Display(Name = "Sportart")]
         public Sport Sport { get; set; }
+        [Display(Name = "Name")]
+        public string Name { get; set; }
         [Required]
         [Display(Name = "Trainingsbeginn")]
         public DateTime StartTime { get; set; }
