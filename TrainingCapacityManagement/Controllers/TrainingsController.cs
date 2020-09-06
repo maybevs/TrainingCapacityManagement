@@ -11,8 +11,7 @@ using TrainingCapacityManagement.Models;
 
 namespace TrainingCapacityManagement.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Authorize(Roles = "Trainer")]
+    [Authorize(Roles = "Admin,Trainer")]
     public class TrainingsController : Controller
     {
         private readonly TrainingCapacityDefaultContext _context;

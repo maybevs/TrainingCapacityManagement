@@ -30,8 +30,7 @@ namespace TrainingCapacityManagement.Controllers
             return View(await _context.TrainingsRegistration.Where(tr => tr.UserId == UserID).Include(tr => tr.Training).Include(tr => tr.Training.Sport).ToListAsync());
         }
 
-        [Authorize(Roles = "Admin")]
-        [Authorize(Roles = "Trainer")]
+        [Authorize(Roles = "Admin,Trainer")]
         public async Task<IActionResult> TrainerView(int tid)
         {
             var registrations = await _context.TrainingsRegistration.Include(tr => tr.Training).Include(tr => tr.Training.Sport).Include(tr => tr.Training.Gym).Where(tr => tr.Training.Id == tid).ToListAsync();
