@@ -16,8 +16,10 @@ namespace TrainingCapacityManagement.Models
         public string Name { get; set; }
         [Required]
         [Display(Name = "Trainingsbeginn")]
+        [DataType(DataType.DateTime)]
         public DateTime StartTime { get; set; }
         [Display(Name = "Trainingsende")]
+        [DataType(DataType.Time)]
         public DateTime EndTime { get; set; }
         [Display(Name = "Halle")]
         public Gym Gym { get; set; }

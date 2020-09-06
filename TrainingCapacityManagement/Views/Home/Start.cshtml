@@ -83,6 +83,7 @@
                             {
                                 bool isRegistered = myTrainings.Where(m => m.Training == (Training)t.Key).Count() != 0;
                                 bool isFull = t.Value == 0;
+                                bool isNearlyFull = ((int)t.Value) < 4;
                                 string myClass = "";
                                 if(isRegistered)
                                 {
@@ -93,6 +94,11 @@
                                     if(isFull)
                                     {
                                         myClass = "table-secondary";
+                                    }
+                                    else
+                                    {
+                                        if(isNearlyFull)
+                                        myClass = "table-warning";
                                     }
                                 }
 
