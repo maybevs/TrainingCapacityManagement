@@ -11,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using TrainingCapacityManagement.Data;
 using System.Globalization;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using TrainingCapacityManagement.Services;
 
 namespace TrainingCapacityManagement
 {
@@ -27,13 +29,26 @@ namespace TrainingCapacityManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            var connectionString = Configuration["ConnectionStrings:TrainingCapacityDefaultContext"];
+
+            //Database Context
+            //var connectionString = Configuration["ConnectionStrings:TrainingCapacityDefaultContext"];
             //services.AddDbContext<TrainingCapacityDefaultContext>(options =>
             //        options.UseSqlServer(connectionString));
 
-
             services.AddDbContext<TrainingCapacityDefaultContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("TrainingCapacityDefaultContext")));
+
+            //EMail Service / SendGrid
+
+            var sendGridUser = Configuration["SendGridUser"];
+            var sendGridKey = Configuration["SendGridKey"];
+
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(options => options.UseSendGrid(sendGridUser,sendGridKey));
+            
+            //services.Configure<AuthMessageSenderOptions>(Configuration);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

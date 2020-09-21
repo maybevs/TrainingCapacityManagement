@@ -49,10 +49,18 @@ namespace TrainingCapacityManagement.Controllers
             var uId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var allRegs = await _context.TrainingsRegistration.Include(tr => tr.Training).Include(tr => tr.Training.Sport).Include(tr => tr.Training.Gym).OrderBy(tr => tr.Training.StartTime).ToListAsync();
             var myTrainings = allRegs.Where(tr => tr.UserId == uId).ToList();
+            var myInterests = await _context.Interest.Include(i => i.Sport).Include(i => i.User).Where(i => i.User.Id == uId).Select(i => i.Sport).ToListAsync();
+
+            if (myInterests.Count == 0)
+            {
+                return RedirectToAction("Create", "Interests");
+            }
+
+
             ViewBag.MyTrainings = myTrainings;
 
 
-            var trainings = await _context.Training.Include(s => s.Sport).Include(s => s.Gym).OrderBy(s => s.StartTime).ToListAsync();
+            var trainings = await _context.Training.Include(s => s.Sport).Include(s => s.Gym).OrderBy(s => s.StartTime).Where(s => myInterests.Contains(s.Sport)).ToListAsync();
             
             trainings = trainings.Where(s => DateTime.Compare(s.PublishingDate,DateTime.Now.AddHours(2)) == -1).Where(s => DateTime.Compare(s.StartTime,DateTime.Now.AddDays(1)) == 1).ToList();
             //foreach (var mytraining in myTrainings)

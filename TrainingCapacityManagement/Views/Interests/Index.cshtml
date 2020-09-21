@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TrainingCapacityManagement.Models.Interest>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Deine Sportarten</h1>
+
+<p>
+    <a asp-action="Create">Weitere Sportarten eintragen</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Sport)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sport.Name)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id">Löschen</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

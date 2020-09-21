@@ -17,14 +17,14 @@
         <h4 class="alert-heading">Hygiene Konzept</h4>
         <a href="@ViewBag.Training.SafetyConceptURL">@ViewBag.Training.SafetyConceptURL</a>
     </div>
-    <p>Startzeit: @ViewBag.Training.StartTime</p>
+    <p>Startzeit: @ViewBag.Training.StartTime.ToString("dd.MM.yy - HH:mm")</p>
     <p>Ort: @ViewBag.Training.Gym.Name</p>
 </div>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div class="form-group">
-                <input asp-for="tid" class="form-control" hidden>@ViewBag.Training.Id</input>
+                <input asp-for="tid" class="form-control" type=hidden/>
                 <span asp-validation-for="tid" class="text-danger"></span>
             </div>
             <div class="form-group">

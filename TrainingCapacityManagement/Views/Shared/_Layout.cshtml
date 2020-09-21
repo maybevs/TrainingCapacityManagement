@@ -28,6 +28,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="TrainingsRegistrations" asp-action="Index">Meine Anmeldungen</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Interests" asp-action="Index">Meine Abteilungen</a>
+                            </li>
                             if (User.IsInRole("Admin") || User.IsInRole("Trainer"))
 
                             {
@@ -37,17 +40,13 @@
                             }
                             if (User.IsInRole("Admin"))
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-controller="Sports" asp-action="Index">Sportarten</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-controller="Gyms" asp-action="Index">Turnhallen</a>
-                                </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Management
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" asp-area="" asp-controller="Sports" asp-action="Index">Sportarten</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Gyms" asp-action="Index">Turnhallen</a>
                                         <a class="dropdown-item" asp-area="" asp-controller="Messages" asp-action="Index">Nachrichten</a>
                                         <a class="dropdown-item" asp-area="" asp-controller="UserRoles" asp-action="Index">User Management</a>
                                         <a class="dropdown-item" asp-area="" asp-controller="RoleManager" asp-action="Index">Rollen Management</a>

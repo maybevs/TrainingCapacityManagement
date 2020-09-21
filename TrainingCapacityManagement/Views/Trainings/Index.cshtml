@@ -57,8 +57,11 @@
             </td>
             <td>
                 @*<a asp-controller="TrainingsRegistrations" asp-action="TrainerView" asp- asp-route-id="@item.Id">Anmeldungen anzeigen</a>*@
-                <a href="/TrainingsRegistrations/TrainerView/?tid=@item.Id">Anmeldungen anzeigen</a>|
-                <a asp-action="Delete" asp-route-id="@item.Id">Löschen</a>
+                @if(User.IsInRole("Trainer") || User.IsInRole("Admin"))
+                { 
+                <a href="/TrainingsRegistrations/TrainerView/?tid=@item.Id">Anmeldungen anzeigen</a>
+                }
+                |<a asp-action="Delete" asp-route-id="@item.Id">Löschen</a>
             </td>
         </tr>
         }

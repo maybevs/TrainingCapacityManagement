@@ -1,0 +1,68 @@
+﻿@model List<TrainingCapacityManagement.Models.SportsSelector>
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Sportarten</h1>
+
+<h4>Bitte gib eben an, welche Sportarten du bei uns betreibst.</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                @{
+                    for (int i = 0; i < Model.Count(); i++)
+                    {
+
+                        <input asp-for="@Model[i].IsChecked" type="checkbox" class="checkbox" />
+                        <label asp-for="@Model[i].Sport" class="control-label">@Model[i].Sport.Name</label>
+                        <input asp-for="@Model[i].Sport" type="hidden" />
+                        <input asp-for="@Model[i].Sport.Id" type="hidden" />
+                        <input asp-for="@Model[i].Sport.Name" type="hidden" />
+                        <br />
+                    }
+
+                }
+
+
+
+
+                @*<form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StreetAddress" class="control-label"></label>
+                <input asp-for="StreetAddress" class="form-control" />
+                <span asp-validation-for="StreetAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Speichern" class="btn btn-primary" />
+            </div>
+        </form>*@
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Ändern" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Zurück</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -10,7 +10,7 @@ namespace TrainingCapacityManagement.Models
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name = "Hallenname")]
+        [Display(Name = "Ort")]
         public string Name { get; set; }
         [Display(Name = "Straße")]
         public string StreetAddress { get; set; }

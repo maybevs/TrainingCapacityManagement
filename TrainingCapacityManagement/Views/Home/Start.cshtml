@@ -125,7 +125,7 @@
                     @if (!isRegistered)
                     {
                         <td>
-                            <a href="/TrainingsRegistrations/Create/?tid=@t.Key.Id" class="btn btn-sm @(t.Value>=1?"btn-primary":"btn-secondary disabled")" @(t.Value < 1 ? "aria-disabled=true" : "")>Anmelden</a>
+                            <a href="/TrainingsRegistrations/Create/?tid=@t.Key.Id" class="btn btn-sm @(t.Value>=1?"btn-primary":"btn-secondary disabled")" @(t.Value < 1 ? "aria-disabled=true" : "")>Teilnehmen</a>
                         </td>
                     }
                     else

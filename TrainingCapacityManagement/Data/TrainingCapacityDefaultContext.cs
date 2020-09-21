@@ -28,6 +28,8 @@ namespace TrainingCapacityManagement.Data
 
         public DbSet<TrainingCapacityManagement.Models.Message> Message { get; set; }
 
+        public DbSet<TrainingCapacityManagement.Models.Interest> Interest { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

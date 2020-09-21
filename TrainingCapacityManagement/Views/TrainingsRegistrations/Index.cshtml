@@ -32,8 +32,7 @@
                     @Html.DisplayFor(modelItem => item.Training.StartTime)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Löschen</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Teilnahme absagen</a>
                 </td>
             </tr>
         }

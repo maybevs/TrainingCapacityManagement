@@ -53,7 +53,6 @@ namespace TrainingCapacityManagement.Models
     {
         [Key]
         public int Id { get; set; }
-
         public Training Training { get; set; }
         public string UserId { get; set; }
 

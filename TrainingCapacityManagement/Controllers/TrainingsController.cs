@@ -152,6 +152,15 @@ namespace TrainingCapacityManagement.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var training = await _context.Training.FindAsync(id);
+
+            var trainingsRegistrations = await _context.TrainingsRegistration.Include(tr => tr.Training).Where(tr => tr.Training.Id == training.Id).ToListAsync();
+            foreach(var tr in trainingsRegistrations)
+            {
+                _context.TrainingsRegistration.Remove(tr);
+            }
+
+
+
             _context.Training.Remove(training);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

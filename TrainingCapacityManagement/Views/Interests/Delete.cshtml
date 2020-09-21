@@ -1,0 +1,27 @@
+﻿@model TrainingCapacityManagement.Models.Interest
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Löschen</h1>
+
+<h3>Möchtest du keine Trainings mehr dieser Sportart sehen?</h3>
+<div>
+    <h4>Sportart</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sport)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sport.Name)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Löschen" class="btn btn-danger" /> |
+        <a asp-action="Index">Zur Sportartenübersicht</a>
+    </form>
+</div>
