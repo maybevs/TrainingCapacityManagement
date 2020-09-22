@@ -141,7 +141,11 @@
 
                         {
                 <td>
-                    <a href="/TrainingsRegistrations/TrainerView/?tid=@t.Key.Id">Anmeldungen anzeigen</a> |
+                    @if ((int)t.Key.Capacity - t.Value != 0)
+                    {
+                        <a href="/TrainingsRegistrations/TrainerView/?tid=@t.Key.Id">Anmeldungen anzeigen</a>
+                        <br/>
+                    }
                     <a href="/Trainings/Delete/@t.Key.Id">Training Absagen</a>
                 </td>
                         }

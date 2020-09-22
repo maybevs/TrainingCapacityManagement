@@ -34,6 +34,7 @@ namespace TrainingCapacityManagement.Controllers
         public async Task<IActionResult> TrainerView(int tid)
         {
             var registrations = await _context.TrainingsRegistration.Include(tr => tr.Training).Include(tr => tr.Training.Sport).Include(tr => tr.Training.Gym).Where(tr => tr.Training.Id == tid).ToListAsync();
+            
             var users = await _context.Users.ToListAsync();
             List<ApplicationUser> registeredUsers = new List<ApplicationUser>();
 

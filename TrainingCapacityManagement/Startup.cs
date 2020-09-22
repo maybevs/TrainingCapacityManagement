@@ -13,6 +13,7 @@ using TrainingCapacityManagement.Data;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using TrainingCapacityManagement.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace TrainingCapacityManagement
 {
@@ -46,7 +47,13 @@ namespace TrainingCapacityManagement
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(options => options.UseSendGrid(sendGridUser,sendGridKey));
-            
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             //services.Configure<AuthMessageSenderOptions>(Configuration);
 
         }
@@ -71,6 +78,8 @@ namespace TrainingCapacityManagement
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCookiePolicy();
 
 
             app.UseEndpoints(endpoints =>
