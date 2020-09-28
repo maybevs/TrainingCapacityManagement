@@ -8,8 +8,12 @@ This is a little tool I wrote for my Archery-Club which provides an easy way of 
 ## Features
 * Create trainings,
 * Register for trainings,
-* Have a list for trainers to cross check names.
+* Have an attendee list for trainers to cross check names.
+* Supports having different sports departments using the same side. Users can choose what trainings they see.
+
 
 ## Currently missing
 * Design is horrible.
-* SendGrid implementation for automatic EMails.
+* Notify all attendees if a training is cancelled (SendGrid already included, but not implemented for this case)
+* Code Cleanup
+* Automatically recurring trainings
