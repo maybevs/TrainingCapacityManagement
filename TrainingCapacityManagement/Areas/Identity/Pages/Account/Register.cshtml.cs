@@ -100,7 +100,7 @@ namespace TrainingCapacityManagement.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "TSV Jahn Trainingsmanagement: Registrierung",
-                        $"Bitte bestätige deine EMail <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>hier</a>.");
+                        $"Herzlich willkommen! <br/> Bitte bestätige deine EMail <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>hier</a>. <br/> <br/> Wir verwenden deine EMail um dich über Änderungen an Trainings zu Informieren und damit du z.B. dein Passwort zurücksetzen kannst. <br/> Du kannst deinen Account jederzeit in deinem <a href='https://jahn-fs-training.de/Identity/Account/Manage/PersonalData'>Profil</a> löschen.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

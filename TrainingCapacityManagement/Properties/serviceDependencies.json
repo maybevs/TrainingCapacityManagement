@@ -14,6 +14,10 @@
     "mssql3": {
       "type": "mssql",
       "connectionId": "TrainingCapacityDefaultContext"
+    },
+    "appInsights1": {
+      "type": "appInsights",
+      "connectionId": "APPINSIGHTS_INSTRUMENTATIONKEY"
     }
   }
 }

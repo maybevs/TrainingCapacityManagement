@@ -28,7 +28,7 @@ namespace TrainingCapacityManagement.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("bernd.mayer@outlook.com", Options.SendGridUser),
+                From = new EmailAddress("noreply@em5018.mail.jahn-fs-training.de", Options.SendGridUser),
                 Subject = subject,
                 PlainTextContent = htmlMessage,
                 HtmlContent = htmlMessage

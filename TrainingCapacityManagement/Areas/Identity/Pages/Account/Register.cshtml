@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Registrierung";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
+            <h4>Neuen Account anlegen.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -39,6 +39,8 @@
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
+        <p>Wir speichern deine Daten um den Hallensport zu ermöglichen. Nur deine Trainer haben Zugriff auf die Daten.</p>
+        <p>EMails versenden wir über sendgrid.com. Es kann sein, dass die Registrierungsbestätigung im Spamordner landen! (Und es kann manchmal etwas dauern bis die EMail kommt. Zur Not mich kurz anschreiben)</p>
     </div>
 </div>
 

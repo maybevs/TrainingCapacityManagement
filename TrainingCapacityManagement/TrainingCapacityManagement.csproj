@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>55228d17-76a5-45df-879e-f0262be29a04</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/16005f50-1da9-48fc-9924-06d0e6f8e1b1/resourceGroups/JahnTraining/providers/microsoft.insights/components/jahntraining</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />

@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 using TrainingCapacityManagement.Models;
 using TrainingCapacityManagement.Data;
 using Message = TrainingCapacityManagement.Models.Message;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TrainingCapacityManagement.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MessagesController : Controller
     {
         private readonly TrainingCapacityDefaultContext _context;

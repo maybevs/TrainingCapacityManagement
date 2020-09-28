@@ -14,6 +14,8 @@ using System.Globalization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using TrainingCapacityManagement.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.FileProviders;
 
 namespace TrainingCapacityManagement
 {
@@ -53,6 +55,7 @@ namespace TrainingCapacityManagement
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
 
             //services.Configure<AuthMessageSenderOptions>(Configuration);
 
@@ -80,6 +83,16 @@ namespace TrainingCapacityManagement
             app.UseAuthorization();
 
             app.UseCookiePolicy();
+
+            var provider = new FileExtensionContentTypeProvider();
+            provider.Mappings[".webmanifest"] = "application/manifest+json";
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider("/"),
+                RequestPath = "",
+                ContentTypeProvider = provider
+            });
 
 
             app.UseEndpoints(endpoints =>

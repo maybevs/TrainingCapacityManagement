@@ -8,6 +8,12 @@
       "type": "mssql.azure",
       "connectionId": "TrainingCapacityDefaultContext",
       "secretStore": "LocalSecretsFile"
+    },
+    "appInsights1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/jahntraining",
+      "type": "appInsights.azure",
+      "connectionId": "APPINSIGHTS_INSTRUMENTATIONKEY",
+      "secretStore": "LocalSecretsFile"
     }
   }
 }

@@ -127,6 +127,7 @@ namespace TrainingCapacityManagement.Controllers
             return View(trainingsRegistration);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: TrainingsRegistrations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -146,6 +147,7 @@ namespace TrainingCapacityManagement.Controllers
         // POST: TrainingsRegistrations/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UserId")] TrainingsRegistration trainingsRegistration)
@@ -185,10 +187,14 @@ namespace TrainingCapacityManagement.Controllers
             {
                 return NotFound();
             }
+            var uId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            
+
 
             var trainingsRegistration = await _context.TrainingsRegistration.Include(s => s.Training).Include(s => s.Training.Sport)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (trainingsRegistration == null)
+            if (trainingsRegistration == null || trainingsRegistration.UserId != uId)
             {
                 return NotFound();
             }
