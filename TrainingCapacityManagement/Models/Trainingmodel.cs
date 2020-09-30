@@ -23,7 +23,7 @@ namespace TrainingCapacityManagement.Models
         public DateTime EndTime { get; set; }
         [Display(Name = "Halle")]
         public Gym Gym { get; set; }
-        [Display(Name = "Teilnahmerkapazität")]
+        [Display(Name = "Teilnehmerkapazität")]
         public int Capacity { get; set; }
         [Display(Name = "Haushalte können sich Plätze teilen")]
         public bool HouseholdsSharePlace { get; set; }

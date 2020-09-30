@@ -26,6 +26,11 @@ namespace TrainingCapacityManagement.Controllers
         public async Task<IActionResult> Index()
         {
             var trainings = _context.Training.Include(t => t.Sport).Include(t => t.Gym).Where(t => DateTime.Compare(t.StartTime,DateTime.Now.AddDays(1)) == 1);
+
+            var history = await _context.Training.Include(t => t.Sport).Include(t => t.Gym).Where(t => DateTime.Compare(t.StartTime, DateTime.Now.AddDays(1)) == -1).ToListAsync();
+            ViewBag.History = history;
+            var registrations = await _context.TrainingsRegistration.Include(r => r.Training).ToListAsync();
+            ViewBag.Registrations = registrations;
             return View(await trainings.ToListAsync());
         }
 
