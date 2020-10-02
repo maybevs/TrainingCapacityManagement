@@ -25,9 +25,9 @@ namespace TrainingCapacityManagement.Controllers
         
         public async Task<IActionResult> Index()
         {
-            var trainings = _context.Training.Include(t => t.Sport).Include(t => t.Gym).Where(t => DateTime.Compare(t.StartTime,DateTime.Now.AddDays(1)) == 1);
+            var trainings = _context.Training.Include(t => t.Sport).Include(t => t.Gym).Where(t => DateTime.Compare(t.StartTime.AddDays(1), DateTime.Now) == 1);
 
-            var history = await _context.Training.Include(t => t.Sport).Include(t => t.Gym).Where(t => DateTime.Compare(t.StartTime, DateTime.Now.AddDays(1)) == -1).ToListAsync();
+            var history = await _context.Training.Include(t => t.Sport).Include(t => t.Gym).Where(t => DateTime.Compare(t.StartTime.AddDays(1), DateTime.Now) == -1).ToListAsync();
             ViewBag.History = history;
             var registrations = await _context.TrainingsRegistration.Include(r => r.Training).ToListAsync();
             ViewBag.Registrations = registrations;
@@ -75,6 +75,7 @@ namespace TrainingCapacityManagement.Controllers
                 training.Sport = sport;
                 var gym = _context.Gym.Where(g => g.Id == training.GymSelection).FirstOrDefault();
                 training.Gym = gym;
+                training.EndTime = new DateTime(training.StartTime.Year, training.StartTime.Month, training.StartTime.Day, training.EndTime.Hour, training.EndTime.Minute, 0);
                 _context.Add(training);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

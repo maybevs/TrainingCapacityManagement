@@ -61,12 +61,10 @@ namespace TrainingCapacityManagement.Controllers
 
 
             var trainings = await _context.Training.Include(s => s.Sport).Include(s => s.Gym).OrderBy(s => s.StartTime).Where(s => myInterests.Contains(s.Sport)).ToListAsync();
-            
-            trainings = trainings.Where(s => DateTime.Compare(s.PublishingDate,DateTime.Now.AddHours(2)) == -1).Where(s => DateTime.Compare(s.StartTime,DateTime.Now.AddDays(1)) == 1).ToList();
-            //foreach (var mytraining in myTrainings)
-            //{
-            //    trainings.Remove(mytraining.Training);
-            //}
+            //var cutoffDate = DateTime.Now.AddDays(1).AddHours(5);
+            //var dateTest = DateTime.Compare(new DateTime(2020, 10, 01, 20, 00,00), cutoffDate);
+            trainings = trainings.Where(s => DateTime.Compare(s.PublishingDate,DateTime.Now.AddHours(2)) == -1).Where(s => DateTime.Compare(s.StartTime.AddHours(6), DateTime.Now) >= 0).ToList();
+
 
             Dictionary<Training, int> trainingsWithRemainingCapa = new Dictionary<Training, int>();
 

@@ -90,7 +90,7 @@
                 @Html.DisplayNameFor(model => model.EndTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Capacity)
+                Anmeldungen / @Html.DisplayNameFor(model => model.Capacity)
             </th>
             <th></th>
         </tr>
@@ -112,10 +112,10 @@
                     @item.StartTime
                 </td>
                 <td>
-                    @item.EndTime
+                    @item.EndTime.ToString("HH:MM")
                 </td>
                 <td>
-                    @item.Capacity
+                    @(((List<TrainingsRegistration>)ViewBag.Registrations).Where(r => r.Training == item).Count()) / @item.Capacity
                 </td>
                 <td>
                     @*<a asp-controller="TrainingsRegistrations" asp-action="TrainerView" asp- asp-route-id="@item.Id">Anmeldungen anzeigen</a>*@
