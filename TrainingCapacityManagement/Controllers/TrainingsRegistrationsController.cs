@@ -27,7 +27,7 @@ namespace TrainingCapacityManagement.Controllers
         public async Task<IActionResult> Index()
         {
             var UserID = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return View(await _context.TrainingsRegistration.Where(tr => tr.UserId == UserID).Include(tr => tr.Training).Include(tr => tr.Training.Sport).ToListAsync());
+            return View(await _context.TrainingsRegistration.Where(tr => tr.UserId == UserID).Include(tr => tr.Training).Include(tr => tr.Training.Sport).Where(tr => DateTime.Compare(tr.Training.StartTime.AddDays(1), DateTime.Now) == 1).ToListAsync());
         }
 
         [Authorize(Roles = "Admin,Trainer")]
