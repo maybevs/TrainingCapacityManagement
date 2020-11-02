@@ -68,16 +68,17 @@
 
     <style>
         .footer {
-            position: fixed;
-            width: 100%;
-            left: 0;
+            position: relative;
             bottom: 0;
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
         }
     </style>
-    <footer class="border-top border-primary footer mt-auto text-muted py-3"> 
+    <footer class="border-top border-primary footer text-muted"> 
         <div class="container">
             <partial name="_CookieConsentPartial" />
-            &copy; 2020 - TrainingCapacityManagement - <a asp-area="" asp-controller="Home" asp-action="Privacy">Datenschutz</a>
+            &copy; 2020 - TSV Jahn Freising Trainingsplanung - <a asp-area="" asp-controller="Home" asp-action="Privacy">Datenschutz</a>
             <a asp-area="" asp-controller="Home" asp-action="Impressum">Impressum</a>
         </div>
     </footer>

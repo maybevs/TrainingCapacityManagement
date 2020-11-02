@@ -1,14 +1,16 @@
 ﻿@model IEnumerable<TrainingCapacityManagement.Models.TrainingsRegistration>
 @using Microsoft.AspNetCore.Identity
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Trainingsanmeldungen";
 }
 
 <h1>Anmeldungen</h1>
 @if (Model.Count() != 0)
 {
+<h3>@Model.FirstOrDefault().Training.Sport.Name</h3>
 <p>Ort: @Model.FirstOrDefault().Training.Gym.Name</p>
-<p>Startzeit: @Model.FirstOrDefault().Training.StartTime</p>
+<p>Am: @Model.FirstOrDefault().Training.StartTime.Date.ToString("dd.MM.yyyy")</p>
+<p>Von: @Model.FirstOrDefault().Training.StartTime.ToString("HH:mm") Bis: @Model.FirstOrDefault().Training.EndTime.ToString("HH:mm")</p>
 
 @*<p>
         <a asp-action="Create">Create New</a>
@@ -19,6 +21,9 @@
             <th>
                 Teilnehmer
             </th>
+            <th>
+                EMail
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -28,6 +33,9 @@
             <tr>
                 <td>
                     @user.FirstName @user.LastName
+                </td>
+                <td>
+                    @user.Email
                 </td>
                 <td>
                     @*<a asp-action="Delete" asp-route-id="@item.Id">Löschen</a>*@

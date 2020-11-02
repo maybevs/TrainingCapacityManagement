@@ -70,7 +70,7 @@
     </tbody>
 </table>
 
-<h3>Vergangene Trainings</h3>
+<h3>Vergangene Trainings (4 Wochen)</h3>
 <table class="table">
     <thead>
         <tr>
@@ -112,7 +112,7 @@
                     @item.StartTime
                 </td>
                 <td>
-                    @item.EndTime.ToString("HH:MM")
+                    @item.EndTime.ToString("HH:mm")
                 </td>
                 <td>
                     @(((List<TrainingsRegistration>)ViewBag.Registrations).Where(r => r.Training == item).Count()) / @item.Capacity

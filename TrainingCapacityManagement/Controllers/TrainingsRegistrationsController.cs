@@ -10,6 +10,7 @@ using TrainingCapacityManagement.Models;
 using System.Security.Claims;
 using TrainingCapacityManagement.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace TrainingCapacityManagement.Controllers
 {
@@ -122,7 +123,7 @@ namespace TrainingCapacityManagement.Controllers
                 trainingsRegistration.UserId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 _context.Add(trainingsRegistration);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Start","Home");
             }
             return View(trainingsRegistration);
         }

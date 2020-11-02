@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,6 +39,24 @@ namespace TrainingCapacityManagement.Models
         public int SportsSelection { get; set; }
 
         public DateTime DateSelection { get; set; }
+
+    }
+
+    [NotMapped]
+    public class RepeatingTraining
+    {
+        public Training BaseTraining { get; set; }
+        [Display(Name = "Wiederholung")]
+        public Cadence Cadence { get; set; }
+
+    }
+    
+    public enum Cadence
+    {
+        [Display(Name = "Wöchentlich")]
+        Weekly,
+        [Display(Name = "Zweiwöchentlich")]
+        BiWeekly
     }
 
     public class Sport

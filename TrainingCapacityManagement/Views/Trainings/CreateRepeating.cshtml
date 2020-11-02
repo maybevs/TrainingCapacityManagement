@@ -1,0 +1,85 @@
+﻿@model TrainingCapacityManagement.Models.RepeatingTraining
+
+@{
+    ViewData["Title"] = "Trainingsreihe erstellen";
+}
+<h1>Anlegen</h1>
+
+<h4>Trainingreihe</h4>
+<hr />
+<div class="row">
+    <div class="col-lg-8">
+        <form asp-action="CreateRepeating">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="BaseTraining.Sport" class="control-label"></label>
+                    @Html.DropDownListFor(m => m.BaseTraining.SportsSelection, new SelectList(ViewBag.Sports, "Id", "Name"), new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="BaseTraining.Gym" class="control-label"></label>
+                    @Html.DropDownListFor(m => m.BaseTraining.GymSelection, new SelectList(ViewBag.Gyms, "Id", "Name"), new { @class = "form-control" })
+                </div>
+            </div>
+            <hr class="border-primary" />
+            <div class="row">
+                <div class="col">
+                    <label asp-for="BaseTraining.Name" class="control-label"></label>
+                    <input asp-for="BaseTraining.Name" class="form-control" />
+                    <span asp-validation-for="BaseTraining.Name" class="text-danger"></span>
+                </div>
+            </div>
+            <hr class="border-primary" />
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="BaseTraining.StartTime" class="control-label"></label>
+                    <input asp-for="BaseTraining.StartTime" class="form-control" value="18:00" />
+                    <span asp-validation-for="BaseTraining.StartTime" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="BaseTraining.EndTime" class="control-label"></label>
+                    <input asp-for="BaseTraining.EndTime" class="form-control"  value="18:00" step="300" />
+                    <span asp-validation-for="BaseTraining.EndTime" class="text-danger"></span>
+                </div>
+            </div>
+            <hr class="border-primary" />
+            <div class="form-group">
+                <label asp-for="BaseTraining.Capacity" class="control-label"></label>
+                <input asp-for="BaseTraining.Capacity" class="form-control" />
+                <span asp-validation-for="BaseTraining.Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="BaseTraining.HouseholdsSharePlace" /> @Html.DisplayNameFor(model => model.BaseTraining.HouseholdsSharePlace)
+                </label>
+            </div>
+            <hr class="border-primary" />
+            <div class="form-group">
+                <label asp-for="BaseTraining.SignupMessage" class="control-label"></label>
+                <input asp-for="BaseTraining.SignupMessage" class="form-control" />
+                <span asp-validation-for="BaseTraining.SignupMessage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BaseTraining.SafetyConceptURL" class="control-label"></label>
+                <input asp-for="BaseTraining.SafetyConceptURL" class="form-control" />
+                <span asp-validation-for="BaseTraining.SafetyConceptURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BaseTraining.PublishingDate" class="control-label"></label>
+                <input asp-for="BaseTraining.PublishingDate" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm")" />
+                <span asp-validation-for="BaseTraining.PublishingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Speichern" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Zurück zur Trainingsliste</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
